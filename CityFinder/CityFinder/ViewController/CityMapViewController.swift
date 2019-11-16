@@ -7,14 +7,15 @@
 //
 
 import UIKit
+import MapKit
 
 class CityMapViewController: UIViewController {
+    @IBOutlet weak var cityMap: MKMapView!
+    
+    public var cityCoordinate: (Double, Double) = (0, 0)
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-
-        // Do any additional setup after loading the view.
     }
 
 

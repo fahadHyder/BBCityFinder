@@ -20,6 +20,7 @@
 		ECF3764C237C747200921807 /* CityListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF3764B237C747200921807 /* CityListViewModel.swift */; };
 		ECF3764E237C74E800921807 /* CitiesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF3764D237C74E800921807 /* CitiesDataSource.swift */; };
 		ECF37650237C753200921807 /* CityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF3764F237C753200921807 /* CityModel.swift */; };
+		ECF37652237CF54900921807 /* CityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF37651237CF54900921807 /* CityCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		ECF3764B237C747200921807 /* CityListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityListViewModel.swift; sourceTree = "<group>"; };
 		ECF3764D237C74E800921807 /* CitiesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesDataSource.swift; sourceTree = "<group>"; };
 		ECF3764F237C753200921807 /* CityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityModel.swift; sourceTree = "<group>"; };
+		ECF37651237CF54900921807 /* CityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +158,7 @@
 				ECF3764B237C747200921807 /* CityListViewModel.swift */,
 				ECF3764D237C74E800921807 /* CitiesDataSource.swift */,
 				ECF3764F237C753200921807 /* CityModel.swift */,
+				ECF37651237CF54900921807 /* CityCell.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -301,6 +304,7 @@
 			files = (
 				ECF37646237C704A00921807 /* CityMapViewController.swift in Sources */,
 				EC404D00237A3C6400799B81 /* AppDelegate.swift in Sources */,
+				ECF37652237CF54900921807 /* CityCell.swift in Sources */,
 				ECF3764C237C747200921807 /* CityListViewModel.swift in Sources */,
 				EC404D02237A3C6400799B81 /* SceneDelegate.swift in Sources */,
 				ECF37642237C6FE000921807 /* CityListViewController.swift in Sources */,

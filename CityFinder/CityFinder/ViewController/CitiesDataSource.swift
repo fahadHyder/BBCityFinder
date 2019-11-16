@@ -24,7 +24,8 @@ class CitiesDataSource {
                 do {
                     let data = try Data(contentsOf: url)
                     let decoder = JSONDecoder()
-                    self?.citiesData = try decoder.decode([CityModel].self, from: data)
+                    let citiesData = try decoder.decode([CityModel].self, from: data)
+                    self?.citiesData = citiesData.sorted(by: { $0.name.lowercased() < $1.name.lowercased() })
                     completion(.success)
                 } catch {
                     print("error:\(error)")

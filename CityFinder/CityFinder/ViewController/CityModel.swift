@@ -24,6 +24,16 @@ struct CityModel: Decodable {
     
 }
 
+extension CityModel: Hashable {
+    static func == (lhs: CityModel, rhs: CityModel) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.id)
+    }
+}
+
 struct Coordinate: Decodable {
     let longitude: Double
     let latitude: Double
