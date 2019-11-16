@@ -55,7 +55,7 @@ class CityListViewModel {
         }
     }
     
-    func city(atIndex index: Int) -> CityModel? {
+    func city(atIndex index: Int) -> CityModel {
         return citiesData[index]
     }
     
@@ -64,14 +64,12 @@ class CityListViewModel {
     }
     
     func cityCoordinate(atIndex index: Int) -> (Double, Double) {
-        if let city = city(atIndex: index) {
-            return (city.coordinate.latitude, city.coordinate.longitude)
-        }
-        return (0, 0)
+        let cityData = city(atIndex: index)
+        return (cityData.coordinate.latitude, cityData.coordinate.longitude)
     }
 }
 
-//Mark :- Search
+// MARK: - Search
 
 extension CityListViewModel {
     
