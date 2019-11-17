@@ -15,15 +15,19 @@ Repo contains CityFinder application which filter cities based on search term.
 * Used dictionary to group CityModel array to country as key (CityDictionary).
 * Used another dictionary to group CityModel array to country name first character as key(AlphabeticOrderedDictionary).
 * Used Set collection to avoid duplicate objects.
+* Used dictionary as cache, which hold previous searches. It becomes empty when search term is empty(cacheDictionary)
     ### Implementation
-    * If search term is empty, load the data array with elements from DataSource
-    * If there is a previous search and new serch term starts with previous search term.
+    * If search term is empty, load the data array with elements from DataSource and update cache and filter array
+    * Else if there is items exist in the cacheDictionary load it.
+    * Else If there is a previous search and new serch term starts with previous search term.
         * Use pre loaded CityDictionary.
         * Call search function with Search term, previous filtered array and CityDictionary.
         * Update filterArray with output from search function.
+        * Update cacheDictionary with filterArray content.
     * Else
         * Call search fucntion with city array created from AlphabeticOrderedDictionary, CityDictionary and search term.
         * Update filterArray with output from search function.
+        * Update cacheDictionary with filterArray content.
     * update the previous search term with new keyword
 
     ### Search function
