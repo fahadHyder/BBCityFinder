@@ -12,16 +12,17 @@ Repo contains CityFinder application which filter cities based on search term.
 
 * Used async processing to keep the app responsive.
 * Used result of previous search. Searching for "Ab" will only be successful if searching for "A" was successful as well. So if last search was a substring from current search, take the output array of previous search as an input.
-* Used dictionary to group CityModel array to country as key
+* Used dictionary to group CityModel array to country as key (CityDictionary).
+* Used another dictionary to group CityModel array to country name first character as key(AlphabeticOrderedDictionary).
 * Used Set collection to avoid duplicate objects.
     ### Implementation
     * If search term is empty, load the data array with elements from DataSource
     * If there is a previous search and new serch term starts with previous search term.
-        * Create a CityDictionary with previous filtered array.
+        * Use pre loaded CityDictionary.
         * Call search function with Search term, previous filtered array and CityDictionary.
         * Update filterArray with output from search function.
     * Else
-        * Call search fucntion with pre loaded city array, CityDictionary and search term.
+        * Call search fucntion with city array created from AlphabeticOrderedDictionary, CityDictionary and search term.
         * Update filterArray with output from search function.
     * update the previous search term with new keyword
 
