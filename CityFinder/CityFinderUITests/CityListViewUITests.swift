@@ -1,5 +1,5 @@
 //
-//  CityListViewTests.swift
+//  CityListViewUITests.swift
 //  CityFinderUITests
 //
 //  Created by fahad c h on 16/11/19.
@@ -8,7 +8,7 @@
 
 import XCTest
 
-class CityListViewTests: XCTestCase {
+class CityListViewUITests: XCTestCase {
 
     var app: XCUIApplication!
     
@@ -51,15 +51,12 @@ class CityListViewTests: XCTestCase {
     
     func test_tappingcells_loadsAboutViewWithData() {
         if XCUIDevice.shared.orientation.isPortrait {
-            //let aboutButton = app.buttons["automationAboutButton"]
             let listTableView = app.tables["automationCitiesTableView"]
             let cityListcell = listTableView.cells["automationCityCell_0"]
             self.waitForElementToAppear(element: cityListcell)
             cityListcell.tap()
             let aboutButton = app.buttons["automationAboutButton"]
             aboutButton.tap()
-            //automationAboutCell_0
-            //automationAboutTableView
             let aboutTableView = app.tables["automationAboutTableView"]
             let aboutcell = aboutTableView.cells["automationAboutCell_0"]
             self.waitForElementToAppear(element: aboutcell)
@@ -69,7 +66,6 @@ class CityListViewTests: XCTestCase {
     
     func test_tappingcells_loadsCorrectData() {
         if XCUIDevice.shared.orientation.isPortrait {
-            //let aboutButton = app.buttons["automationAboutButton"]
             let listTableView = app.tables["automationCitiesTableView"]
             let cityListcell = listTableView.cells["automationCityCell_0"]
             self.waitForElementToAppear(element: cityListcell)
@@ -78,8 +74,6 @@ class CityListViewTests: XCTestCase {
             cityListcell.tap()
             let aboutButton = app.buttons["automationAboutButton"]
             aboutButton.tap()
-            //automationAboutCell_0
-            //automationAboutTableView
             let aboutTableView = app.tables["automationAboutTableView"]
             let aboutcell = aboutTableView.cells["automationAboutCell_0"]
             self.waitForElementToAppear(element: aboutcell)
