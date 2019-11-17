@@ -21,6 +21,28 @@ class CityListViewUITests: XCTestCase {
         continueAfterFailure = false
     }
     
+    func test_tappingcells_loadsCorrectData() {
+        XCUIDevice.shared.orientation = .landscapeLeft
+        XCUIDevice.shared.orientation = .portrait
+        if XCUIDevice.shared.orientation.isPortrait {
+            let listTableView = app.tables["automationCitiesTableView"]
+            let cityListcell = listTableView.cells["automationCityCell_0"]
+            self.waitForElementToAppear(element: cityListcell)
+            var cityListCellTitleValue = cityListcell.staticTexts["automationCityCellTitleLabel"].label
+
+            cityListcell.tap()
+            let aboutButton = app.buttons["automationAboutButton"]
+            aboutButton.tap()
+            let aboutTableView = app.tables["automationAboutTableView"]
+            let aboutcell = aboutTableView.cells["automationAboutCell_0"]
+            self.waitForElementToAppear(element: aboutcell)
+            let aboutCellTitleValue = aboutcell.staticTexts["automationAboutCelldetailTextLabel"].label
+            cityListCellTitleValue = cityListCellTitleValue.components(separatedBy: ",").first ?? ""
+            XCTAssertTrue(aboutCellTitleValue == cityListCellTitleValue)
+            sleep(3)
+        }
+    }
+    
     func testAboutButtonExist() {
         XCUIDevice.shared.orientation = .landscapeLeft
         if XCUIDevice.shared.orientation.isLandscape {
@@ -28,7 +50,7 @@ class CityListViewUITests: XCTestCase {
             XCTAssertTrue(aboutButton.exists)
         }
     }
-    
+
     func testTableViewloadesWithCells() {
         if XCUIDevice.shared.orientation.isPortrait {
             let listTableView = app.tables["automationCitiesTableView"]
@@ -37,7 +59,7 @@ class CityListViewUITests: XCTestCase {
             XCTAssert(cell0.exists)
         }
     }
-    
+
     func test_tappingAboutViewButton_loadsAboutView() {
         XCUIDevice.shared.orientation = .landscapeLeft
         if XCUIDevice.shared.orientation.isLandscape {
@@ -48,7 +70,7 @@ class CityListViewUITests: XCTestCase {
             aboutButton.tap()
         }
     }
-    
+
     func test_tappingcells_loadsAboutViewWithData() {
         if XCUIDevice.shared.orientation.isPortrait {
             let listTableView = app.tables["automationCitiesTableView"]
@@ -63,26 +85,8 @@ class CityListViewUITests: XCTestCase {
             sleep(3)
         }
     }
-    
-    func test_tappingcells_loadsCorrectData() {
-        if XCUIDevice.shared.orientation.isPortrait {
-            let listTableView = app.tables["automationCitiesTableView"]
-            let cityListcell = listTableView.cells["automationCityCell_0"]
-            self.waitForElementToAppear(element: cityListcell)
-            var cityListCellTitleValue = cityListcell.staticTexts["automationCityCellTitleLabel"].label
-            
-            cityListcell.tap()
-            let aboutButton = app.buttons["automationAboutButton"]
-            aboutButton.tap()
-            let aboutTableView = app.tables["automationAboutTableView"]
-            let aboutcell = aboutTableView.cells["automationAboutCell_0"]
-            self.waitForElementToAppear(element: aboutcell)
-            let aboutCellTitleValue = aboutcell.staticTexts["automationAboutCelldetailTextLabel"].label
-            cityListCellTitleValue = cityListCellTitleValue.components(separatedBy: ",").first ?? ""
-            XCTAssertTrue(aboutCellTitleValue == cityListCellTitleValue)
-            sleep(3)
-        }
-    }
+
+
     
 
     override func tearDown() {

@@ -92,12 +92,10 @@ extension CityListViewController: UISearchBarDelegate {
 extension CityListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         cityListViewModel.setSelectedCityIndex(index: indexPath.row)
-        
-        if UIDevice.current.orientation.isLandscape {
-            updateMapContainer()
-        } else {
+        if UIDevice.current.orientation.isPortrait {
             performSegue(withIdentifier: "mapPushSegue", sender: self)
         }
+        updateMapContainer()
     }
 }
 
@@ -105,6 +103,7 @@ extension CityListViewController: UITableViewDelegate {
 
 extension CityListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        /// we could return a finate number instead of array count since the user won't be watching at thousands of cells at once so there by increase table performance.
         return cityListViewModel.citiesCount
     }
     
