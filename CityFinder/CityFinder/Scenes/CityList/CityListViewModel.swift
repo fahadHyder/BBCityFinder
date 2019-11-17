@@ -51,6 +51,9 @@ class CityListViewModel {
     /// The Dictionary  holds city array, Key is country name first character and Value is array of CityModel
     var alphabeticOrderedDictionary = [String: [CityModel]]()
     
+    /// The Dictionary  caches city array that searched previously, Key is Search term and Value is array of CityModel
+    var cacheDictionary = [String: [CityModel]]()
+    
     /**
      Get all cities data from data source.
      Calling this mehod removes all element from citiesData and Fill it with data from cityDataSource.
@@ -148,7 +151,12 @@ extension CityListViewModel {
             filteringData.removeAll()
             self.citiesData.removeAll()
             self.citiesData.append(contentsOf: citiesData)
+            self.cacheDictionary.removeAll()
             self.updateHandler?()
+        } else if let array = self.cacheDictionary[lowerCasedKeyWord] {
+            filteringData.removeAll()
+            filteringData.append(contentsOf: array)
+            self.updateDataSource()
         } else if lowerCasedKeyWord.hasPrefix(previousSearch), previousSearch.count > 0 {
             let searchOperation = BlockOperation()
             searchOperation.addExecutionBlock { [weak self] in
@@ -158,6 +166,7 @@ extension CityListViewModel {
                 let finalResult = strongSelf.doSearch(forKey: lowerCasedKeyWord, cityDictionary: strongSelf.cityDictionary, cityArray: strongSelf.filteringData)
                 strongSelf.filteringData.removeAll()
                 strongSelf.filteringData.append(contentsOf: finalResult)
+                self?.cacheDictionary[lowerCasedKeyWord] = strongSelf.filteringData
             }
             
             searchOperation.completionBlock = { [weak self] in
@@ -169,7 +178,7 @@ extension CityListViewModel {
             }
             searchOperationQueue.addOperation(searchOperation)
 
-        } else {
+        }  else {
             searchOperationQueue.cancelAllOperations()
             filteringData.removeAll()
 
@@ -182,6 +191,7 @@ extension CityListViewModel {
                 let cityArray = strongSelf.alphabeticOrderedDictionary[fisrtLetter] ?? []
                 let finalResult = strongSelf.doSearch(forKey: lowerCasedKeyWord, cityDictionary: strongSelf.cityDictionary, cityArray: cityArray)
                 strongSelf.filteringData.append(contentsOf: finalResult)
+                self?.cacheDictionary[lowerCasedKeyWord] = strongSelf.filteringData
             }
             
             searchOperation.completionBlock = { [weak self] in
