@@ -20,7 +20,7 @@ Repo contains CityFinder application which filter cities based on search term.
         * Create a CityDictionary with previous filtered array.
         * Call search function with Search term, previous filtered array and CityDictionary.
         * Update filterArray with output from search function.
-    * If this is first search
+    * Else
         * Call search fucntion with pre loaded city array, CityDictionary and search term.
         * Update filterArray with output from search function.
     * update the previous search term with new keyword
@@ -28,10 +28,11 @@ Repo contains CityFinder application which filter cities based on search term.
     ### Search function
     It will take 3 paramters. Search Keyword, Array of Cities, Dictionary of Cities with country as Key.
     
-    * If search term lenght is less than 3.
+    * If search term lenght is less than 3. 
         * Get all keys from CityDictionary.
         * Filter key based on search term.
         * Add all city elments from CityDictionary to new array which matches keys in FilteredKeys
+    * Else search function won't consider the CityDictionary at all as the country name is only 2 character.
     * Filter the Array of Cities based on the search term and add to new Array.
     * Append the elements above two arrays.
     * Create a Set and insert elements from above operation.By doing this we can avoid duplicate elements.
