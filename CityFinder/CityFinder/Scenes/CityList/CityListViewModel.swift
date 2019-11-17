@@ -46,13 +46,10 @@ class CityListViewModel {
     }()
     
     /// The Dictionary  holds city array, Key is country name and Value is array of CityModel
-    lazy var cityDictionary: [String: [CityModel]] = {
-        if let cities = cityDataSource.citiesData {
-            let dic = Dictionary(grouping: cities, by: { $0.country })
-            return dic
-        }
-        return [String: [CityModel]]()
-    }()
+    var cityDictionary = [String: [CityModel]]()
+    
+    /// The Dictionary  holds city array, Key is country name first character and Value is array of CityModel
+    var alphabeticOrderedDictionary = [String: [CityModel]]()
     
     /**
      Get all cities data from data source.
@@ -66,11 +63,19 @@ class CityListViewModel {
             case .success:
                 if let citiesData = self?.cityDataSource.citiesData {
                     self?.citiesData.append(contentsOf: citiesData)
+                    self?.updateDictionaries()
                 }
             case .error(let error):
                 print(error)
             }
             completion()
+        }
+    }
+    
+    func updateDictionaries() {
+        if let cities = cityDataSource.citiesData {
+            cityDictionary = Dictionary(grouping: cities, by: { $0.country })
+            alphabeticOrderedDictionary = Dictionary(grouping: cities, by: { String($0.name.first ?? " ").lowercased() })
         }
     }
     
@@ -150,8 +155,7 @@ extension CityListViewModel {
                 guard let strongSelf = self else {
                     return
                 }
-                let filteredDic = Dictionary(grouping: strongSelf.filteringData, by: { $0.country })
-                let finalResult = strongSelf.doSearch(forKey: lowerCasedKeyWord, cityDictionary: filteredDic, cityArray: strongSelf.filteringData)
+                let finalResult = strongSelf.doSearch(forKey: lowerCasedKeyWord, cityDictionary: strongSelf.cityDictionary, cityArray: strongSelf.filteringData)
                 strongSelf.filteringData.removeAll()
                 strongSelf.filteringData.append(contentsOf: finalResult)
             }
@@ -174,7 +178,9 @@ extension CityListViewModel {
                 guard let strongSelf = self else {
                     return
                 }
-                let finalResult = strongSelf.doSearch(forKey: lowerCasedKeyWord, cityDictionary: strongSelf.cityDictionary, cityArray: strongSelf.cityDataSource.citiesData ?? [])
+                let fisrtLetter = String(lowerCasedKeyWord.first ?? " ")
+                let cityArray = strongSelf.alphabeticOrderedDictionary[fisrtLetter] ?? []
+                let finalResult = strongSelf.doSearch(forKey: lowerCasedKeyWord, cityDictionary: strongSelf.cityDictionary, cityArray: cityArray)
                 strongSelf.filteringData.append(contentsOf: finalResult)
             }
             
